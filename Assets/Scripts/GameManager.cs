@@ -3,19 +3,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Timers;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject StartTimer;
+    public static GameManager _instan;
 
-    public GameObject pacman;
+    private static GameManager _instance;
 
+    public static GameManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+    
     public int score = 0;
     public Text remainText;
     public Text nowText;
     public Text scoreText;
 
     public GameObject Player;
+
+    public GameObject gamestartPanel;
+    public GameObject gameoverPrefab;
+    public GameObject gamePanel;
+    public GameObject winPrefab;
+    public AudioClip startClip;
 
     public int HealthValue = 3;
 
@@ -38,11 +53,7 @@ public class GameManager : MonoBehaviour
         {
             dontDestroy.MaxScore = score;
         }
-    }
-
-    public void OnStartButton()
-    {
-         
+    
     }
 
     public void PlayAudio() {
@@ -53,5 +64,4 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-
 }
