@@ -59,6 +59,8 @@
     <Compile Include="Assets\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\CherryController.cs" />
+    <Compile Include="Assets\Scripts\PacStudentController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
