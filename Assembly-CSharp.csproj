@@ -56,11 +56,19 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Timer.cs" />
+    <Compile Include="Assets\Scripts\GhostController.cs" />
+    <Compile Include="Assets\BoxTrigger.cs" />
+    <Compile Include="Assets\WeaponManager.cs" />
+    <Compile Include="Assets\Portal.cs" />
     <Compile Include="Assets\DontDestroy.cs" />
+    <Compile Include="Assets\Scripts\Pacdot.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\CherryController.cs" />
     <Compile Include="Assets\Scripts\PacStudentController.cs" />
+    <Compile Include="Assets\CherryController.cs" />
+    <Compile Include="Assets\trigger.cs" />
+    <Compile Include="Assets\BulletTrigger.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
