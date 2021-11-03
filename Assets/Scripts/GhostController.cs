@@ -28,7 +28,7 @@ public class GhostController : MonoBehaviour
         if (collision.gameObject.name == "Pacman")
         {
             GameObject.FindGameObjectWithTag("HealthValue").GetComponent<Text>().text = GameManager.Instance.HealthValue.ToString();
-            if (GameManager.Instance.isSuperPacman == false && GameManager.Instance.HealthValue != 0)//When the player is not a super player and has 0 HP
+            if (GameManager.Instance.isSuperPacman == false && GameManager.Instance.HealthValue != 0)//when the player is not a super player and the HP is not 0
             {
                 GameManager.Instance.HealthValue -= 1;
                 GameObject.Find("Dead").GetComponent<AudioSource>().Play();
@@ -39,14 +39,14 @@ public class GhostController : MonoBehaviour
                 PacStudentController._instance.LastInput = null;
                 PacStudentController._instance.CurrentInput = null;
             }
-            if (GameManager.Instance.isSuperPacman)//When a player becomes a super player
+            if (GameManager.Instance.isSuperPacman)//when a player becomes a super player
             {
                 GameManager.Instance.FreezeEnemy(this.gameObject);
                 GameManager.Instance.DestroyEnemy(this.gameObject);
                 GameManager.Instance.score +=300;
                 GameObject.Find("Eat").GetComponent<AudioSource>().Play();
             }
-            if(GameManager.Instance.isSuperPacman==false&&GameManager.Instance.HealthValue==0)//When the player is not a super player and has 0 HP
+            if(GameManager.Instance.isSuperPacman==false&&GameManager.Instance.HealthValue==0)//when the player is not a super player and has 0 HP
             {
                 GameManager.Instance.HealthValue -= 1;
                 Vector3 P = GameManager._instan.ReBoomPosition.transform.position;

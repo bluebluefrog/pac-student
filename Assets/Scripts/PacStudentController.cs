@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PacStudentController : MonoBehaviour
 {
@@ -6,11 +7,11 @@ public class PacStudentController : MonoBehaviour
 
     public float speed;
 
-    public string PlayerInput=null;
+    public string PlayerInput=null;//player's current input
 
-    public string LastInput=null;
+    public string LastInput=null;//last key input
 
-    public string CurrentInput=null;
+    public string CurrentInput=null;//current input button
 
     public ParticleSystem VFX;
 
@@ -290,24 +291,11 @@ public class PacStudentController : MonoBehaviour
 
         if(IsGun)
         {
-           if(Input.GetMouseButtonDown(0)&&IsBullet==false)
-           {
-                CurrentBullet = GameObject.Instantiate(BulletPerfab,FirePosition.transform.position,FirePosition.transform.rotation);//增加一个开火的位置使其在开火位置产生并从该位置的X轴射出，开火的X轴会随着Player动画的改变方向而同时改变X轴的方向
-                IsBullet = true;
-           }
+            GameManager._instan.HealthValue+=1;
+            GameObject.Find("HealthValue").GetComponent<Text>().text = GameManager.Instance.HealthValue.ToString();
+            IsGun = false;
         }
 
-        if (IsBullet)
-        {
-            CurrentBullet.transform.Translate(new Vector3(0.5f, 0, 0));
-            Guntimer += Time.deltaTime;
-            if(Guntimer>=0.2f)
-            {
-                CurrentBullet = null;
-                IsBullet = false;
-                Guntimer = 0f;
-            }
-        }
 
         if(IsShow)
         {

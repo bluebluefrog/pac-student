@@ -16,6 +16,7 @@ public class Pacdot : MonoBehaviour
             else
             {
                 GameManager.Instance.OnEatPacdot(gameObject);
+                GameManager.Instance.number+=1;
                 Destroy(gameObject);
             }
            
