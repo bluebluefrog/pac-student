@@ -14,10 +14,10 @@ public class Timer : MonoBehaviour
         public Text test_chenggong;
         int a = 0;
 
-    // Elapsed time
+    //elapsed time
     float timeSpend = 0.0f;
 
-    // Display the text of the time zone
+    // display the text of the time zone
 
     // Use this for initialization
     void Start()

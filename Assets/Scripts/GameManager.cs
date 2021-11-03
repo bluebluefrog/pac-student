@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public List<int> usingIndex = new List<int>();
     public List<int> rawIndex = new List<int> {0,1,2,3};
-    private List<GameObject> pacdotGos = new List<GameObject>();
+    public List<GameObject> pacdotGos = new List<GameObject>();
     private int pacdotNum = 0;
     private int nowEat = 0;
     public int score = 0;
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject ReBoomPosition;
 
-    public bool IsOnEatSuperPacdot = false;//Whether to eat super dot
+    public bool IsOnEatSuperPacdot = false;//whether to eat super beans
 
     public GameObject EatSuperPacdotText;
 
@@ -75,8 +75,13 @@ public class GameManager : MonoBehaviour
 
     public bool OnStartGame = true;
 
+    public GameObject WinPrefab;
+
+    public int number = 0;
+
     private void Awake()
     {
+        WinPrefab.SetActive(false);
         Timer.enabled = false;
         _instance = this;
         _instan = this;
@@ -101,6 +106,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (number==181)
+        {
+            StartCoroutine(WinDelay());
+        }
+
+        IEnumerator WinDelay()
+        {
+            WinPrefab.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene(0);
+        }
+
         //After obtaining the highest score script, compare whether the current score is greater than the highest score, and if it is greater, re-assign the highest score
         DontDestroy dontDestroy = GameObject.Find("DontDestroy").GetComponent<DontDestroy>();
         if (dontDestroy.MaxScore < score)
@@ -242,18 +259,18 @@ public class GameManager : MonoBehaviour
 
     private void CreateSuperpacdot() 
     {
-        if (pacdotGos.Count < 5) 
-        {
-            return;
-        }
+            if (pacdotGos.Count < 5)
+            {
+                return;
+            }
 
-        int tempIndex= Random.Range(0, pacdotGos.Count);
-        pacdotGos[tempIndex].transform.localScale = new Vector3(3, 3, 3);
-        pacdotGos[tempIndex].GetComponent<Pacdot>().isSuperPacdot = true;
+            int tempIndex = Random.Range(0, pacdotGos.Count);
+            pacdotGos[tempIndex].transform.localScale = new Vector3(3, 3, 3);
+            pacdotGos[tempIndex].GetComponent<Pacdot>().isSuperPacdot = true;
     }
 
 
-    private void ChangeEnemy()//change color
+    private void ChangeEnemy()//change the color of the enemy
     {
         goman1.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.7f, 0.7f, 0.7f);
         goman2.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f, 0.7f);
@@ -261,7 +278,7 @@ public class GameManager : MonoBehaviour
         goman4.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f, 0.7f);
     }
 
-    private void UnChangeEnemy()//change color
+    private void UnChangeEnemy()//change the color of the enemy
     {
         goman1.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         goman2.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
@@ -270,12 +287,34 @@ public class GameManager : MonoBehaviour
         }
 
     public void FreezeEnemy(GameObject go) {
-        go.GetComponent<GhostController>().enabled = false;//shotdown enemy
+        go.GetComponent<GhostController>().enabled = false;//turn off enemy function script
     }
 
     public void DestroyEnemy(GameObject go)
     {
-        go.SetActive(false);//DestroyEnemy
+        go.SetActive(false);//destroyenemy
+        if (goman1.activeInHierarchy==false)
+        {
+            StartCoroutine(EnemyAwake(goman1));
+        }
+        if (goman2.activeInHierarchy == false)
+        {
+            StartCoroutine(EnemyAwake(goman2));
+        }
+        if (goman3.activeInHierarchy == false)
+        {
+            StartCoroutine(EnemyAwake(goman3));
+        }
+        if (goman4.activeInHierarchy == false)
+        {
+            StartCoroutine(EnemyAwake(goman4));
+        }
+    }
+
+    IEnumerator EnemyAwake(GameObject goman)
+    {
+        yield return new WaitForSeconds(10f);
+        goman.SetActive(true);
     }
 
     public void UnFreezeEnemy() {
